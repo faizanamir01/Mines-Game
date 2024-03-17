@@ -24,7 +24,6 @@ function printBoard(ar) {
     for(let i=0; i<n; i++)
     {
         console.log(ar[i].join(' | '));
-        //console.log(ar[i]);
     }
 }
 printBoard(arr);
@@ -34,8 +33,16 @@ while(!flag)
 {
     console.log();
     console.log('Player '+pnum+ ' move:');
-    let x = prompt('Enter X coordinate of tile to open: ');
-    let y = prompt('Enter Y coordinate of tile to open: ');
+    let coordinates = prompt('Enter coordinates of tile to open: ');
+
+    var t=coordinates.split(' ');
+    if(t.length<2) 
+    {
+        console.log('!Invalid coordinates.');
+        continue;
+    }
+    x=t[0];
+    y=t[1];
 
     if(x=='e' || y=='e') return;
 
@@ -55,20 +62,33 @@ while(!flag)
     
     if(x==mineX && y==mineY)
     {
+        console.log();
         console.log(`Player ${pnum} opened a mine. Player ${pnum === 1 ? 2 : 1} wins!`);
         flag = true;
-        arr[x][y] = 'M'; // 'O' represents opened tile
-        printBoard(arr);
+        for(let i=0; i<n; i++)
+        {
+            for(let j=0; j<n; j++)
+            {
+                arr[i][j]='G';
+            }
+        }
+        arr[x][y] = 'M';
+        console.log("Actual Board:")
+        for(let i=0; i<n; i++)
+        {
+            console.log(arr[i].join(' | '));
+        }
         break;
     }
 
     if (pnum == 1)    cnt1++;
     else              cnt2++;
 
-    arr[x][y] = 'G'; // 'O' represents opened tile
+    arr[x][y] = 'G'; 
     printBoard(arr);
 
     if (cnt1 >= mx && cnt2 >= mx) {
+        console.log();
         console.log(`Both players opened ${mx} tiles each. It's a draw!`);
         arr[mineX][mineY] = 'M';
         printBoard(arr);
