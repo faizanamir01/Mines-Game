@@ -62,13 +62,11 @@ function playGame()
     var arr=[];                                 // array to store the board state
     var flag=false;                             // boolean value to indicate if game is over
     var pnum=1;                                 // integer to indicate which player's turn it is
-    var cnt1=10,cnt2=10;                        // integers to store the number of moves of each player
+    var cnt1=0,cnt2=0;                        // integers to store the number of moves of each player
 
     // Generates a mine at a random location
     const mineX = Math.floor(Math.random() * n);
     const mineY = Math.floor(Math.random() * n);
-    console.log(mineX+1);  
-    console.log(mineY+1);
 
     console.log();
     let player1 = prompt('Enter Player1 name: ');
